@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'clock.dart';
-import 'stopwatch.dart';
+import 'stopwatch/stopwatch_page.dart';
 import 'timer.dart';
+import 'utils/my_appbar.dart';
 
 void main() {
   runApp(MyApp());
+  // 沉浸式
+  SystemUiOverlayStyle systemUiOverlayStyle =
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 }
 
 class MyApp extends StatelessWidget {
@@ -31,16 +37,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  List<Widget> pages = [ClockPage(), StopwatchPage(), TimerPage()];
+  List<Widget> pages = [ClockPage(), MyStopwatchPage(), TimerPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.share), onPressed: () {}),
-        ],
-      ),
+      appBar: MyAppBar("Time"),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
