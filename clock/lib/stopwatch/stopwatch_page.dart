@@ -12,7 +12,6 @@ class _MyStopwatchState extends State<MyStopwatchPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar("Stopwatch"),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [StopwatchTime()],
