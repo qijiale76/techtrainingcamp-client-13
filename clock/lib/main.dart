@@ -44,6 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: MyAppBar("Time"),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.alarm), title: Text('时间')),
           BottomNavigationBarItem(icon: Icon(Icons.watch), title: Text('秒表')),
