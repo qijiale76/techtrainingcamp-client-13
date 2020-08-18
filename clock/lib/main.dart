@@ -4,6 +4,7 @@ import 'clock.dart';
 import 'stopwatch/stopwatch_page.dart';
 import 'timer.dart';
 import 'utils/my_appbar.dart';
+import 'gesture.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,11 +38,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  List<Widget> pages = [ClockPage(), MyStopwatchPage(), TimerPage()];
+  List<Widget> pages = [Gesture(), MyStopwatchPage(), TimerPage()];
+  List<String> titles = ["Clock", "StopWatch", "Timer"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar("Time"),
+      appBar: MyAppBar(titles[_selectedIndex]),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.transparent,
