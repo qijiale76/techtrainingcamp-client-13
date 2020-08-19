@@ -13,6 +13,7 @@ class SelectArea extends StatelessWidget{
       constraints: BoxConstraints.expand(width: 400, height: 200),
       child: CupertinoTimerPicker(
         mode: CupertinoTimerPickerMode.hms,
+        initialTimerDuration: Duration(minutes: 5),
         onTimerDurationChanged: (Duration newTimer){
           _time = newTimer;
         },
