@@ -18,6 +18,7 @@ class _TimePageState extends State<ClockPage> {
   List<int> _time;
   String time;
   String date;
+  List<Widget> clocks;
 
   String formatTime(int timeNum) {
     return timeNum < 10 ? "0" + timeNum.toString() : timeNum.toString();
@@ -37,8 +38,7 @@ class _TimePageState extends State<ClockPage> {
         formatTime(_time[5]);
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget clock(BuildContext context) {
     return Center(
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -54,6 +54,11 @@ class _TimePageState extends State<ClockPage> {
         ],
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return clock(context);
   }
 
   @override
