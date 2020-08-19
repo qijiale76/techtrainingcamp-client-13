@@ -39,7 +39,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  List<Widget> pages = [TimerPage(), MyStopwatchPage(), MyTimerPage()];
+  List<Widget> pages = [Gesture(), MyStopwatchPage(), MyTimerPage()];
   List<String> titles = ["Clock", "StopWatch", "Timer"];
   @override
   Widget build(BuildContext context) {
