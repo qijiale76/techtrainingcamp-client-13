@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/time_formatter.dart';
 
@@ -33,7 +34,7 @@ class _StopwatchTime extends State<StopwatchTime> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('${record.length - index}', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.start),
-                      Text('${TimerFormatter.toStopwatch(record[index])}', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.end)
+                      Text('${TimerFormatter.minSecMilli(record[index])}', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.end)
                     ],
                   );
                 },
@@ -46,11 +47,11 @@ class _StopwatchTime extends State<StopwatchTime> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               stopwatch.isRunning
-                  ? MyFloatingButton(Icon(Icons.playlist_add, size: 45), _lap)
-                  : MyFloatingButton(Icon(Icons.replay, size: 45), _reset),
+                  ? MyButton(Icon(Icons.playlist_add, size: 45), _lap)
+                  : MyButton(Icon(Icons.replay, size: 45), _reset),
               stopwatch.isRunning
-                  ? MyFloatingButton(Icon(Icons.pause, size: 45), _stop)
-                  : MyFloatingButton(Icon(Icons.play_arrow, size: 50), _start)
+                  ? MyButton(Icon(Icons.pause, size: 45), _stop)
+                  : MyButton(Icon(Icons.play_arrow, size: 50), _start)
             ],
           ),
         ]
@@ -106,10 +107,12 @@ class _PrintTimeState extends State<PrintTime> {
   final Stopwatch stopwatch;
 
   void update(Timer timer) {
-    if (stopwatch.isRunning) {
-      setState(() {
+    if(mounted){
+      if (stopwatch.isRunning) {
+        setState(() {
 
-      });
+        });
+      }
     }
   }
 
@@ -120,25 +123,24 @@ class _PrintTimeState extends State<PrintTime> {
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 50.0);
-    String toPrint = TimerFormatter.toStopwatch(
+    String toPrint = TimerFormatter.minSecMilli(
         stopwatch.elapsedMilliseconds);
     return Text(toPrint, style: textStyle, textAlign: TextAlign.center);
   }
 
 }
 
-class MyFloatingButton extends StatelessWidget {
+class MyButton extends StatelessWidget {
   final Icon icon;
   final VoidCallback callback;
 
-  MyFloatingButton(this.icon, this.callback);
+  MyButton(this.icon, this.callback);
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return CupertinoButton(
       child: icon,
       onPressed: callback,
-      elevation: 0,
     );
   }
 }
