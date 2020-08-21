@@ -8,7 +8,7 @@ class MyTimerPage extends StatelessWidget{
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [MyTimer()]
+        children: [MyTimerWidget()]
       )
     );
   }

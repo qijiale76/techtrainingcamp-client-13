@@ -1,21 +1,49 @@
 import 'dart:async';
+import 'package:clock/timer/countdown_area.dart';
+import 'package:flutter/material.dart';
 import 'select_area.dart';
 import 'package:flutter/cupertino.dart';
-import '../utils/time_formatter.dart';
-import 'countdown_area.dart';
+import 'my_timer.dart';
+import '../utils/my_button.dart';
 
-class MyTimer extends StatefulWidget{
+class MyTimerWidget extends StatefulWidget{
   @override
-  State<StatefulWidget> createState() => _MyTimerState();
+  State<StatefulWidget> createState() => _MyTimerWidgetState();
 }
 
-class _MyTimerState extends State<MyTimer>{
-  Timer myTimer;
-  int counts = 0;
-  SelectArea selectArea = SelectArea();
-
+class _MyTimerWidgetState extends State<MyTimerWidget>{
+  static MyTimer myTimer = MyTimer();
   Duration time;
 
+  void onTimeDurationChanged(Duration duration){
+    time = duration;
+  }
+
+  void _start(){
+    if(mounted){
+      setState(() {
+        if(time != null) {
+          myTimer.start(time.inSeconds);
+        }
+      });
+    }
+  }
+
+  void _pause(){
+    if(mounted){
+      setState(() {
+        myTimer.pause();
+      });
+    }
+  }
+
+  void _cancel(){
+    if(mounted){
+      setState(() {
+        myTimer.cancel();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,44 +51,20 @@ class _MyTimerState extends State<MyTimer>{
       children: [
         Container(
           alignment: Alignment.topCenter,
-          child: myTimer == null? selectArea:CountdownArea(restTime: "${counts >= 3600 ? TimerFormatter.hourMinSec(counts):TimerFormatter.minSec(counts)}"),
+          child:  myTimer.isRunning? CountdownArea(myTimer: myTimer) : SelectArea(onChanged: onTimeDurationChanged)
         ),
-        CupertinoButton(
-          child: Text("Start"),
-          onPressed: (){
-            if(mounted){
-              setState(() {
-                time = selectArea.time;
-                if (time == null){
-                  return;
-                }
-                counts = time.inSeconds;
-                if(counts == 0){
-                  return;
-                }
-
-                if(myTimer != null){
-                  return;
-                }
-                myTimer = new Timer.periodic(Duration(seconds: 1), (timer) {
-                  if(mounted){
-                    setState(() {
-                      if(counts > 0){
-                        counts--;
-                      }else{
-                        myTimer.cancel();
-                        myTimer = null;
-                      }
-                    });
-                  }
-                });
-              });
-            }
-          }
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            MyButton(text: "Cancel", callback: _cancel,),
+            myTimer.isRunning ?
+            myTimer.isPause ?
+            MyButton(text: "Pause", callback: _pause, color: Colors.red) : MyButton(text: "Pause", callback: _pause):
+            MyButton(text: "Start", callback: _start,)
+          ],
         ),
       ],
     );
   }
-
 
 }

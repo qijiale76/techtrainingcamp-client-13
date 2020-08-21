@@ -3,16 +3,19 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/time_formatter.dart';
+import '../utils/my_button.dart';
 
 class StopwatchTime extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() => _StopwatchTime();
 
 }
 
 class _StopwatchTime extends State<StopwatchTime> {
-  Stopwatch stopwatch = Stopwatch();
-  List<int> record = List<int>();
+  static final Stopwatch stopwatch = Stopwatch();
+  static List<int> record = List<int>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +50,11 @@ class _StopwatchTime extends State<StopwatchTime> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               stopwatch.isRunning
-                  ? MyButton(Icon(Icons.playlist_add, size: 45), _lap)
-                  : MyButton(Icon(Icons.replay, size: 45), _reset),
+                  ? MyButton(icon: Icon(Icons.playlist_add, size: 45), callback: _lap)
+                  : MyButton(icon: Icon(Icons.replay, size: 45), callback: _reset),
               stopwatch.isRunning
-                  ? MyButton(Icon(Icons.pause, size: 45), _stop)
-                  : MyButton(Icon(Icons.play_arrow, size: 50), _start)
+                  ? MyButton(icon: Icon(Icons.pause, size: 45), callback: _stop)
+                  : MyButton(icon: Icon(Icons.play_arrow, size: 50), callback: _start)
             ],
           ),
         ]
@@ -99,16 +102,16 @@ class PrintTime extends StatefulWidget {
   const PrintTime({Key key, this.stopwatch}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _PrintTimeState(stopwatch);
+  State<StatefulWidget> createState() => _PrintTimeState();
+
 }
 
 class _PrintTimeState extends State<PrintTime> {
   Timer _timer;
-  final Stopwatch stopwatch;
 
   void update(Timer timer) {
     if(mounted){
-      if (stopwatch.isRunning) {
+      if (widget.stopwatch.isRunning) {
         setState(() {
 
         });
@@ -116,7 +119,7 @@ class _PrintTimeState extends State<PrintTime> {
     }
   }
 
-  _PrintTimeState(this.stopwatch) {
+  _PrintTimeState() {
     _timer = Timer.periodic(Duration(milliseconds: 20,), update);
   }
 
@@ -124,23 +127,9 @@ class _PrintTimeState extends State<PrintTime> {
   Widget build(BuildContext context) {
     TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 50.0);
     String toPrint = TimerFormatter.minSecMilli(
-        stopwatch.elapsedMilliseconds);
+        widget.stopwatch.elapsedMilliseconds);
     return Text(toPrint, style: textStyle, textAlign: TextAlign.center);
   }
 
 }
 
-class MyButton extends StatelessWidget {
-  final Icon icon;
-  final VoidCallback callback;
-
-  MyButton(this.icon, this.callback);
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoButton(
-      child: icon,
-      onPressed: callback,
-    );
-  }
-}
