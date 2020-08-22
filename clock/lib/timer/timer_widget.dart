@@ -15,8 +15,20 @@ class _MyTimerWidgetState extends State<MyTimerWidget>{
   static MyTimer myTimer = MyTimer();
   Duration time;
 
-  void onTimeDurationChanged(Duration duration){
+  _MyTimerWidgetState(){
+    myTimer.setCallback = _end;
+  }
+
+  void _onTimeDurationChanged(Duration duration){
     time = duration;
+  }
+
+  void _end(){
+    if(mounted){
+      setState(() {
+
+      });
+    }
   }
 
   void _start(){
@@ -51,7 +63,7 @@ class _MyTimerWidgetState extends State<MyTimerWidget>{
       children: [
         Container(
           alignment: Alignment.topCenter,
-          child:  myTimer.isRunning? CountdownArea(myTimer: myTimer) : SelectArea(onChanged: onTimeDurationChanged)
+          child:  myTimer.isRunning? CountdownArea(myTimer: myTimer) : SelectArea(onChanged: _onTimeDurationChanged)
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
