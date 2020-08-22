@@ -1,13 +1,13 @@
-import 'dart:async';
-
-import 'package:clock/utils/time_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 class SelectArea extends StatelessWidget{
   Duration _time;
   final ValueChanged<Duration> onChanged;
+  static const _Notification = const MethodChannel(
+      "com.example.clock/sendNotification");
 
   SelectArea({Key key, @required this.onChanged}) : super(key: key);
 
@@ -19,6 +19,10 @@ class SelectArea extends StatelessWidget{
     return _time;
   }
 
+  void _vibrate() async {
+    _Notification.invokeMethod("vibrate");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +32,7 @@ class SelectArea extends StatelessWidget{
         onTimerDurationChanged: (Duration newTimer){
           _time = newTimer;
           _handleTimerDurationChange();
+          _vibrate();
         },
       ),
     );
