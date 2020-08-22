@@ -6,7 +6,6 @@ import 'timer.dart';
 import 'utils/my_appbar.dart';
 import 'gesture.dart';
 import 'timer/timer_page.dart';
-import 'notification.dart';
 
 void main() {
   runApp(MyApp());
