@@ -19,7 +19,7 @@ class CountdownArea extends StatefulWidget{
 
 
 
-class _CountdownAreaState extends State<CountdownArea> with TickerProviderStateMixin{
+class _CountdownAreaState extends State<CountdownArea>{
 
   Timer _timer;
   
