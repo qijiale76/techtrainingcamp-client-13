@@ -26,7 +26,8 @@ class MyTimer{
         return;
       }
       else{
-        sendNotification(_totalSeconds >= 3600? TimerFormatter.hourMinSec(_totalSeconds) : TimerFormatter.minSec(_totalSeconds));
+        sendNotification(_totalSeconds >= 3600?
+        TimerFormatter.hourMinSec(_totalSeconds) : TimerFormatter.minSec(_totalSeconds));
         timer.cancel();
         timer = null;
         _isRunning = false;
@@ -65,6 +66,10 @@ class MyTimer{
   bool get isPause => _isPause;
 
   int get restSenconds => _counts;
+
+  int get totalSeconds => _totalSeconds;
+
+  int get passSeconds => _totalSeconds - _counts;
 
   set setCallback(VoidCallback callback){
     _callback = callback;

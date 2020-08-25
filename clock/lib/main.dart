@@ -8,6 +8,7 @@ import 'gesture.dart';
 import 'timer/timer_page.dart';
 
 void main() {
+  Size.fromRadius(3);
   runApp(MyApp());
   // 沉浸式
   SystemUiOverlayStyle systemUiOverlayStyle =
