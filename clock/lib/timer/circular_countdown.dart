@@ -24,17 +24,17 @@ class _CircularCountdownState extends State<CircularCountdown> with TickerProvid
   void initState(){
     super.initState();
     widget.myTimer.setCallBackPause = _animationPause;
+    widget.myTimer.setCallBackRestart = _animationRestart;
     _animationController = new AnimationController(vsync: this, duration: Duration(seconds: widget.myTimer.totalSeconds));
     _animationController.value = widget.myTimer.passSeconds / widget.myTimer.totalSeconds;
-    _animationController.addListener(() {
-      if(_isPlaying && widget.myTimer.isPause){
-        _animationController.stop();
-      }
-    });
     _animationController.forward();
   }
 
   void _animationPause(){
+    _animationController.stop();
+  }
+
+  void _animationRestart(){
     _animationController.forward();
   }
 

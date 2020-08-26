@@ -14,6 +14,7 @@ class MyTimer{
       "com.example.clock/sendNotification");
   VoidCallback _callbackEnd;
   VoidCallback _callbackPause;
+  VoidCallback _callbackRestart;
 
   void start(int counts){
     if(counts != 0) {
@@ -49,11 +50,12 @@ class MyTimer{
   void pause(){
     if(_isPause){
       _isPause = false;
+      _callbackRestart();
     }
     else{
       _isPause = true;
+      _callbackPause();
     }
-    _callbackPause();
   }
 
   void cancel(){
@@ -81,6 +83,10 @@ class MyTimer{
 
   set setCallBackPause(VoidCallback callback){
     _callbackPause = callback;
+  }
+
+  set setCallBackRestart(VoidCallback callback){
+    _callbackRestart = callback;
   }
 
 }

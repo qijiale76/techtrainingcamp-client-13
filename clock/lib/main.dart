@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: ColorMode.background,
         iconTheme: IconThemeData(color: ColorMode.buttonColor),
-        appBarTheme: AppBarTheme(color: ColorMode.headline3,),
+        appBarTheme: AppBarTheme(color: Colors.transparent,),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           unselectedItemColor: ColorMode.subtitle,
           selectedItemColor: ColorMode.buttonColor
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(titles[_selectedIndex], style: Theme.of(context).textTheme.headline5),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
       ),
