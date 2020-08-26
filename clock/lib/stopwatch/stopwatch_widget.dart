@@ -117,6 +117,7 @@ class PrintTime extends StatefulWidget {
 }
 
 class _PrintTimeState extends State<PrintTime> {
+  Timer _timer;
   void update(Timer timer) {
     if (mounted) {
       if (widget.stopwatch.isRunning) {
@@ -125,8 +126,13 @@ class _PrintTimeState extends State<PrintTime> {
     }
   }
 
-  _PrintTimeState();
-
+  _PrintTimeState() {
+    _timer = Timer.periodic(
+        Duration(
+          milliseconds: 20,
+        ),
+        update);
+  }
   @override
   Widget build(BuildContext context) {
     String toPrint =
