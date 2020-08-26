@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
+import "utils/color_set.dart";
 
 class WatchPage extends StatefulWidget {
   @override
@@ -68,14 +69,14 @@ class ClockPainter extends CustomPainter {
     var center = Offset(centerX, centerY);
     var radius = size.width / 2;
     //内圈填充
-    var fillBrush = Paint()..color = Colors.white;
+    var fillBrush = Paint()..color = ColorMode.inRingColor;
     //外环填充
     var outlineBrush = Paint()
-      ..color = Color(0xFF2D2F33)
+      ..color = ColorMode.outRingColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 12;
     //中心填充
-    var centerFillBrush = Paint()..color = Color(0xFF393B40);
+    var centerFillBrush = Paint()..color = ColorMode.centerRingColor;
     //秒针
     var secHandBrush = Paint()
       ..shader = RadialGradient(colors: [Colors.lightBlue, Color(0xFFED80C7)])
@@ -101,13 +102,13 @@ class ClockPainter extends CustomPainter {
       ..strokeWidth = 11;
 
     var dashBrush = Paint()
-      ..color = Color(0xFF2D2F33)
+      ..color = ColorMode.brushColor
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 3;
 
     var longBrush = Paint()
-      ..color = Color(0xFF2D2F33)
+      ..color = ColorMode.brushColor
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 5;
@@ -151,7 +152,7 @@ class ClockPainter extends CustomPainter {
         textPainter.text = new TextSpan(
           text: '${i == 0 ? 12 : i ~/ 30}',
           style: TextStyle(
-              color: Color(0xFF2D2F33),
+              color: ColorMode.brushColor,
               fontFamily: 'Times New Roman',
               fontSize: 24.0,
               fontWeight: FontWeight.bold),
