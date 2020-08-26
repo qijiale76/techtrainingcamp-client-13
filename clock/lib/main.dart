@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'stopwatch/stopwatch_page.dart';
-import 'gesture.dart';
+import 'clocks.dart';
 import 'utils/color_set.dart';
 import 'timer/timer_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   ColorMode.init();
@@ -23,36 +22,34 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Clock',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: ColorMode.background,
-        iconTheme: IconThemeData(color: ColorMode.buttonColor),
-        appBarTheme: AppBarTheme(color: Colors.transparent,),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          unselectedItemColor: ColorMode.subtitle,
-          selectedItemColor: ColorMode.buttonColor
-        ),
-        textTheme: TextTheme(
-          headline3: TextStyle(fontWeight:FontWeight.bold, color: ColorMode.headline3),
-          headline4: TextStyle(color: ColorMode.headline4),
-          headline5: TextStyle(color: ColorMode.headline3),
-          subtitle2: TextStyle(color: ColorMode.subtitle),
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        cupertinoOverrideTheme: CupertinoThemeData(
-          textTheme: CupertinoTextThemeData(
-            pickerTextStyle: TextStyle(color: ColorMode.timePicker)
-          )
-        )
-      ),
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: ColorMode.background,
+          iconTheme: IconThemeData(color: ColorMode.buttonColor),
+          appBarTheme: AppBarTheme(
+            color: Colors.transparent,
+          ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              unselectedItemColor: ColorMode.subtitle,
+              selectedItemColor: ColorMode.buttonColor),
+          textTheme: TextTheme(
+            headline3: TextStyle(
+                fontWeight: FontWeight.bold, color: ColorMode.headline3),
+            headline4: TextStyle(color: ColorMode.headline4),
+            headline5: TextStyle(color: ColorMode.headline3),
+            subtitle2: TextStyle(color: ColorMode.subtitle),
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          cupertinoOverrideTheme: CupertinoThemeData(
+              textTheme: CupertinoTextThemeData(
+                  pickerTextStyle: TextStyle(color: ColorMode.timePicker)))),
       home: MyHomePage(title: 'Flutter Clock Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget{
+class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -60,13 +57,14 @@ class MyHomePage extends StatefulWidget{
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  List<Widget> pages = [Gesture(), MyStopwatchPage(), MyTimerPage()];
+  List<Widget> pages = [Clocks(), MyStopwatchPage(), MyTimerPage()];
   List<String> titles = ["Clock", "StopWatch", "Timer"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(titles[_selectedIndex], style: Theme.of(context).textTheme.headline5),
+        title: Text(titles[_selectedIndex],
+            style: Theme.of(context).textTheme.headline5),
 //        backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
