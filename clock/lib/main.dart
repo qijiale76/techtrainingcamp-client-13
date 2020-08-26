@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(titles[_selectedIndex], style: Theme.of(context).textTheme.headline5),
-        backgroundColor: Colors.white,
+//        backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
       ),
