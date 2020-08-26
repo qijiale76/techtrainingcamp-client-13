@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'clock.dart';
 import 'stopwatch/stopwatch_page.dart';
-import 'timer.dart';
 import 'gesture.dart';
 import 'utils/color_set.dart';
 import 'timer/timer_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   ColorMode.init();

@@ -26,6 +26,27 @@ class ColorSet{
     }
   }
 
+  void switchMode(){
+    if(_background == Colors.black){
+      _background = Colors.white;
+      _headline3 = Colors.black;
+      _headline4 = Colors.black38;
+      _subtitle = Colors.black38;
+      _buttonColor = Colors.blue;
+      _progressBarColor = Colors.blue;
+      _timePicker = Colors.black;
+    }
+    else{
+      _background = Colors.black;
+      _headline3 = Colors.white;
+      _headline4 = Colors.white54;
+      _subtitle = Colors.white54;
+      _buttonColor = Colors.amber;
+      _progressBarColor = Colors.amber;
+      _timePicker = Colors.white;
+    }
+  }
+
   final DateTime dateTime;
 
   Color _background;
@@ -77,5 +98,9 @@ class ColorMode{
 
   static void init({int lowerBound: 7, int upperBound: 22}){
     _colorSet = ColorSet(DateTime.now(), lowerBound: lowerBound, upperBound: upperBound);
+  }
+
+  static void switchMode(){
+    _colorSet.switchMode();
   }
 }
