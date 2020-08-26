@@ -19,7 +19,7 @@ class _MyTimerWidgetState extends State<MyTimerWidget>{
   @override
   void initState(){
     super.initState();
-    myTimer.setCallback = _end;
+    myTimer.setCallbackEnd = _end;
   }
 
   void _onTimeDurationChanged(Duration duration){
@@ -62,6 +62,7 @@ class _MyTimerWidgetState extends State<MyTimerWidget>{
 
   @override
   Widget build(BuildContext context) {
+    time = Duration(seconds: 0);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -74,11 +75,11 @@ class _MyTimerWidgetState extends State<MyTimerWidget>{
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            MyButton(text: "Cancel", callback: _cancel,),
+            MyButton(icon: Icon(Icons.stop,), callback: _cancel,),
             myTimer.isRunning ?
             myTimer.isPause ?
-            MyButton(text: "Pause", callback: _pause, color: Colors.red) : MyButton(text: "Pause", callback: _pause):
-            MyButton(text: "Start", callback: _start,)
+            MyButton(icon: Icon(Icons.pause, color: Colors.red, textDirection: TextDirection.ltr,), callback: _pause) : MyButton(icon: Icon(Icons.pause,), callback: _pause):
+            MyButton(icon: Icon(Icons.play_arrow,), callback: _start,)
           ],
         ),
       ],
