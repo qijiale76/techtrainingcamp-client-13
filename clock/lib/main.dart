@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'clock.dart';
 import 'stopwatch/stopwatch_page.dart';
-import 'timer.dart';
 import 'gesture.dart';
 import 'utils/color_set.dart';
 import 'timer/timer_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   ColorMode.init();
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: ColorMode.background,
         iconTheme: IconThemeData(color: ColorMode.buttonColor),
-        appBarTheme: AppBarTheme(color: ColorMode.headline3,),
+        appBarTheme: AppBarTheme(color: Colors.transparent,),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           unselectedItemColor: ColorMode.subtitle,
           selectedItemColor: ColorMode.buttonColor
@@ -68,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(titles[_selectedIndex], style: Theme.of(context).textTheme.headline5),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
       ),
