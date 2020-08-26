@@ -63,6 +63,7 @@ class _TimePageState extends State<ClockPage> {
 
   @override
   void initState() {
+    super.initState();
     parseTime();
     startTimer();
   }
@@ -70,9 +71,11 @@ class _TimePageState extends State<ClockPage> {
   void startTimer() {
     const period = const Duration(seconds: 1);
     Timer.periodic(period, (timer) {
-      setState(() {
-        parseTime();
-      });
+      if (mounted) {
+        setState(() {
+          parseTime();
+        });
+      }
     });
   }
 }

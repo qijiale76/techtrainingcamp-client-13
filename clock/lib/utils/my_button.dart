@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'color_set.dart';
-
 class MyButton extends StatelessWidget {
   final Icon icon;
   final VoidCallback callback;
