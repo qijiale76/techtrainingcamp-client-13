@@ -12,28 +12,31 @@ class MyTimer{
   var _isRunning = false;
   static const _Notification = const MethodChannel(
       "com.example.clock/sendNotification");
-  VoidCallback _callback;
+  VoidCallback _callbackEnd;
+  VoidCallback _callbackPause;
 
   void start(int counts){
-    _counts = counts;
-    _totalSeconds = counts;
-    _isRunning = true;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if(_counts > 0 && !_isPause){
-        _counts--;
-      }else if (_counts > 0 && _isPause)
-      {
-        return;
-      }
-      else{
-        sendNotification(_totalSeconds >= 3600?
-        TimerFormatter.hourMinSec(_totalSeconds) : TimerFormatter.minSec(_totalSeconds));
-        timer.cancel();
-        timer = null;
-        _isRunning = false;
-        _callback();
-      }
-    });
+    if(counts != 0) {
+      _counts = counts * 10;
+      _totalSeconds = counts * 10;
+      _isRunning = true;
+      _timer = Timer.periodic(Duration(milliseconds: 100), (timer) {
+        if (_counts > 0 && !_isPause) {
+          _counts -= 1;
+        } else if (_counts > 0 && _isPause) {
+          return;
+        }
+        else {
+          sendNotification(_totalSeconds/10 >= 3600 ?
+          TimerFormatter.hourMinSec((_totalSeconds/10).truncate()) : TimerFormatter.minSec(
+              (_totalSeconds/10).truncate()));
+          timer.cancel();
+          timer = null;
+          _isRunning = false;
+          _callbackEnd();
+        }
+      });
+    }
   }
 
   void sendNotification(String content) async {
@@ -50,6 +53,7 @@ class MyTimer{
     else{
       _isPause = true;
     }
+    _callbackPause();
   }
 
   void cancel(){
@@ -65,14 +69,18 @@ class MyTimer{
 
   bool get isPause => _isPause;
 
-  int get restSenconds => _counts;
+  int get restSeconds => (_counts/10).truncate();
 
-  int get totalSeconds => _totalSeconds;
+  int get totalSeconds => (_totalSeconds/10).truncate();
 
-  int get passSeconds => _totalSeconds - _counts;
+  int get passSeconds => ((_totalSeconds - _counts)/10).truncate();
 
-  set setCallback(VoidCallback callback){
-    _callback = callback;
+  set setCallbackEnd(VoidCallback callback){
+    _callbackEnd = callback;
+  }
+
+  set setCallBackPause(VoidCallback callback){
+    _callbackPause = callback;
   }
 
 }

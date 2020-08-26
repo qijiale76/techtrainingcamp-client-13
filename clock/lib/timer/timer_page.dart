@@ -1,3 +1,4 @@
+import 'package:clock/utils/color_set.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'timer_widget.dart';
@@ -5,7 +6,9 @@ import 'timer_widget.dart';
 class MyTimerPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return MyTimerWidget();
+    return Scaffold(
+      body: MyTimerWidget(),
+    );
   }
 
 }

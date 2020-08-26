@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clock/utils/color_set.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/time_formatter.dart';
@@ -36,8 +37,8 @@ class _StopwatchTime extends State<StopwatchTime> {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${record.length - index}', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.start),
-                      Text('${TimerFormatter.minSecMilli(record[index])}', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.end)
+                      Text('${record.length - index}', style: Theme.of(context).textTheme.subtitle2, textAlign: TextAlign.start),
+                      Text('${TimerFormatter.minSecMilli(record[index])}', style: Theme.of(context).textTheme.subtitle2, textAlign: TextAlign.end)
                     ],
                   );
                 },
@@ -50,11 +51,11 @@ class _StopwatchTime extends State<StopwatchTime> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               stopwatch.isRunning
-                  ? MyButton(icon: Icon(Icons.playlist_add, size: 45), callback: _lap)
-                  : MyButton(icon: Icon(Icons.replay, size: 45), callback: _reset),
+                  ? MyButton(icon: Icon(Icons.playlist_add, ), callback: _lap)
+                  : MyButton(icon: Icon(Icons.replay, ), callback: _reset),
               stopwatch.isRunning
-                  ? MyButton(icon: Icon(Icons.pause, size: 45), callback: _stop)
-                  : MyButton(icon: Icon(Icons.play_arrow, size: 50), callback: _start)
+                  ? MyButton(icon: Icon(Icons.pause, ), callback: _stop)
+                  : MyButton(icon: Icon(Icons.play_arrow,), callback: _start)
             ],
           ),
         ]
@@ -125,10 +126,9 @@ class _PrintTimeState extends State<PrintTime> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 50.0);
     String toPrint = TimerFormatter.minSecMilli(
         widget.stopwatch.elapsedMilliseconds);
-    return Text(toPrint, style: textStyle, textAlign: TextAlign.center);
+    return Text(toPrint, style: Theme.of(context).textTheme.headline3, textAlign: TextAlign.center);
   }
 
 }

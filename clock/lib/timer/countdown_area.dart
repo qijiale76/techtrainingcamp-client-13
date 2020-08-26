@@ -22,11 +22,11 @@ class CountdownArea extends StatefulWidget{
 class _CountdownAreaState extends State<CountdownArea>{
 
   Timer _timer;
-  
+
   @override
   void initState(){
     super.initState();
-    _timer = Timer.periodic(Duration(milliseconds: 500), _update);
+    Timer.periodic(Duration(milliseconds: 500), _update);
   }
 
   void _update(Timer timer){
@@ -44,8 +44,7 @@ class _CountdownAreaState extends State<CountdownArea>{
 
   @override
   Widget build(BuildContext context) {
-    String toPrint = widget.myTimer.restSenconds >= 3600 ? TimerFormatter.hourMinSec(widget.myTimer.restSenconds) : TimerFormatter.minSec(widget.myTimer.restSenconds);
-    TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 50);
+    String toPrint = widget.myTimer.restSeconds >= 3600 ? TimerFormatter.hourMinSec(widget.myTimer.restSeconds) : TimerFormatter.minSec(widget.myTimer.restSeconds);
     return Stack(
       alignment: AlignmentDirectional.center,
       children: <Widget>[
@@ -58,12 +57,12 @@ class _CountdownAreaState extends State<CountdownArea>{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(toPrint, style:textStyle),
+              Text(toPrint, style: Theme.of(context).textTheme.headline3),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.access_alarm, color: Colors.black38,),
-                  Text(widget.myTimer.totalSeconds >= 3600 ? TimerFormatter.hourMinSec(widget.myTimer.totalSeconds) : TimerFormatter.minSec(widget.myTimer.totalSeconds), style: TextStyle(color: Colors.black38))
+                  Icon(Icons.access_alarm),
+                  Text(widget.myTimer.totalSeconds >= 3600 ? TimerFormatter.hourMinSec(widget.myTimer.totalSeconds) : TimerFormatter.minSec(widget.myTimer.totalSeconds), style: Theme.of(context).textTheme.subtitle2)
                 ],
               )
             ],
