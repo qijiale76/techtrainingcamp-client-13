@@ -1,11 +1,28 @@
-import 'dart:async';
-
+import 'package:clock/utils/color_set.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 class SelectArea extends StatelessWidget{
   Duration _time;
+  final ValueChanged<Duration> onChanged;
+  static const _Notification = const MethodChannel(
+      "com.example.clock/sendNotification");
+
+  SelectArea({Key key, @required this.onChanged}) : super(key: key);
+
+  void _handleTimerDurationChange(){
+    onChanged(_time);
+  }
+
+  Duration get time{
+    return _time;
+  }
+
+  void _vibrate() async {
+    _Notification.invokeMethod("vibrate");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +32,10 @@ class SelectArea extends StatelessWidget{
         mode: CupertinoTimerPickerMode.hms,
         onTimerDurationChanged: (Duration newTimer){
           _time = newTimer;
+          _handleTimerDurationChange();
+          _vibrate();
         },
       ),
     );
   }
-
-  Duration get time{
-    return _time;
-  }
-
 }
-

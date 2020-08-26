@@ -1,14 +1,10 @@
-import 'stopwatch_time.dart';
+import 'package:clock/utils/color_set.dart';
+
+import 'stopwatch_widget.dart';
 import 'package:flutter/material.dart';
-import '../utils/my_appbar.dart';
 
-class MyStopwatchPage extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() =>_MyStopwatchState();
 
-}
-
-class _MyStopwatchState extends State<MyStopwatchPage>{
+class MyStopwatchPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +15,4 @@ class _MyStopwatchState extends State<MyStopwatchPage>{
     );
 
   }
-
-
 }
